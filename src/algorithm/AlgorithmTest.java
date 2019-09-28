@@ -8,14 +8,23 @@ package algorithm;
 public class AlgorithmTest {
 
     public static void main(String[] args) {
-        testQuickSort();
+        testSort();
     }
 
-    private static void testQuickSort() {
+    private static void testSort() {
         int[] testArr = {5, 7, 4, 3, 6, 9, 1, 2, 10, 8};
-        SortUtils.quickSort(testArr, 0, testArr.length - 1);
+        System.out.println("Origin Array is : ");
         for(int i=0; i< testArr.length; i++) {
-            System.out.println(testArr[i]);
+            System.out.print(testArr[i] + " ");
+        }
+        System.out.println("");
+//        SortUtils.quickSort(testArr, 0, testArr.length - 1);
+//        SortUtils.selectSort(testArr, true);
+//        SortUtils.selectSortV2(testArr, true);
+        SortUtils.bubbleSort(testArr, true);
+        System.out.println("After sorted : ");
+        for(int i=0; i< testArr.length; i++) {
+            System.out.print(testArr[i] + " ");
         }
     }
 }
