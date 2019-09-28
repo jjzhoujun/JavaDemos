@@ -17,17 +17,19 @@ public class SortUtils {
         if(lowIndex >= highIndex) {
             return ;
         }
-        int i, j, tempValue, swapValue;
-        tempValue = arr[lowIndex];
+        int i, j, baseValue, swapValue;
+        baseValue = arr[lowIndex];
         i = lowIndex;
         j = highIndex;
         while(i < j) {
-            while(arr[j] >= tempValue && i < j) {
+            // 从j开始从右到左，为什么一定要从右到左呢？ ==》》可断点跑quickSortV2方法
+            while(arr[j] >= baseValue && i < j) {
                 j--;
             }
-            while(arr[i] <= tempValue && i < j) {
+            while(arr[i] <= baseValue && i < j) {
                 i++;
             }
+            // 相等时候就不换
             if(i < j) {
                 swapValue = arr[j];
                 arr[j] = arr[i];
@@ -36,9 +38,79 @@ public class SortUtils {
         }
         //最后将基准为与i和j相等位置的数字交换
         arr[lowIndex] = arr[i];
-        arr[i] = tempValue;
+        arr[i] = baseValue;
+        for(int tempValue : arr) {
+            System.out.print(tempValue + " ");
+        }
+        System.out.println();
         quickSort(arr, lowIndex, j - 1);
         quickSort(arr, j + 1, highIndex);
+    }
+
+    /**
+     * 该函数有误的，因为i先跑的话，因为默认有i++，会导致最后交换的时候，可能会把不需要的数据交换了。
+     * 快排，找到基准，然后从左到右先跑一遍；同上那个输出结果默认也是升序
+     * */
+    @Deprecated
+    public static void quickSortV2(int[] arr, int lowIndex, int highIndex) {
+        if(lowIndex >= highIndex) {
+            return ;
+        }
+        int temp;
+        int i = lowIndex;
+        int j = highIndex;
+        int baseValue = arr[lowIndex];
+        while(i < j) {
+            while(baseValue >= arr[i] && i < j) {
+                i++;
+            }
+            while(baseValue <= arr[j] && i < j) {
+                j--;
+            }
+            if(i < j) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        arr[lowIndex] = arr[i];
+        arr[i] = baseValue;
+        for(int tempValue : arr) {
+            System.out.print(tempValue + " ");
+        }
+        System.out.println();
+        quickSortV2(arr, 0, i - 1);
+        quickSortV2(arr, i + 1, highIndex);
+    }
+
+    /**
+     * 快排的降序版本, 也是j先行，然后退出循环后相换
+     * */
+    public static void quickSortDes(int[] arr, int lowIndex, int hightIndex) {
+        if(lowIndex >= hightIndex) {
+            return ;
+        }
+        int baseValue = arr[lowIndex];
+        int i = lowIndex;
+        int j = hightIndex;
+        int temp;
+        while(i < j) {
+            while(baseValue >= arr[j] && i < j) {
+                j--;
+            }
+            while(baseValue <= arr[i] && i < j) {
+                i++;
+            }
+            if(i < j) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        arr[lowIndex] = arr[i];
+        arr[i] = baseValue;
+        quickSortDes(arr, 0, i - 1);
+        quickSortDes(arr, i + 1, hightIndex);
     }
 
     private static void swapValue(int[] arr, int srcIndex, int desIndex) {
