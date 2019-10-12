@@ -148,7 +148,7 @@ public class SortUtils {
     }
 
     /**
-     * 要交换的时候，先记录index，循环结束后再交换
+     * 要交换的时候，先记录此刻最大（最小值）对应的index，拿此index值跟后续比较，外层循环结束后再交换
      * O(N2)
      */
     public static void selectSortV2(int[] arr, boolean asc) {
@@ -157,25 +157,21 @@ public class SortUtils {
             return ;
         }
         int changeIndex = 0;
-        boolean isChange = false;
         int tempValue;
         for(int i=0; i<size; i++) {
             changeIndex = i;
             for(int j=i+1; j<size; j++) {
                 if(asc) {
                     if(arr[changeIndex] > arr[j]) {
-                        isChange = true;
                         changeIndex = j;
                     }
                 } else {
                     if(arr[changeIndex] < arr[j]) {
-                        isChange = true;
                         changeIndex = j;
                     }
                 }
             }
-            if(isChange) {
-                isChange = false;
+            if(changeIndex != i) {
                 tempValue = arr[i];
                 arr[i] = arr[changeIndex];
                 arr[changeIndex] = tempValue;

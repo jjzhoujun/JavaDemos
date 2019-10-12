@@ -19,10 +19,10 @@ public class AlgorithmTest {
         }
         System.out.println();
 //        SortUtils.quickSort(testArr, 0, testArr.length - 1);
-        SortUtils.quickSortDes(testArr, 0, testArr.length - 1);
+//        SortUtils.quickSortDes(testArr, 0, testArr.length - 1);
 //        SortUtils.quickSortV2(testArr, 0, testArr.length - 1);
 //        SortUtils.selectSort(testArr, true);
-//        SortUtils.selectSortV2(testArr, true);
+        SortUtils.selectSortV2(testArr, true);
 //        SortUtils.bubbleSort(testArr, true);
         System.out.println("After sorted : ");
         for(int i=0; i< testArr.length; i++) {
