@@ -22,8 +22,9 @@ public class AlgorithmTest {
 //        SortUtils.quickSortDes(testArr, 0, testArr.length - 1);
 //        SortUtils.quickSortV2(testArr, 0, testArr.length - 1);
 //        SortUtils.selectSort(testArr, true);
-        SortUtils.selectSortV2(testArr, true);
+//        SortUtils.selectSortV2(testArr, true);
 //        SortUtils.bubbleSort(testArr, true);
+        SortUtils.insertSort(testArr, true);
         System.out.println("After sorted : ");
         for(int i=0; i< testArr.length; i++) {
             System.out.print(testArr[i] + " ");

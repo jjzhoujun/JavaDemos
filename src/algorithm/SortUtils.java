@@ -180,7 +180,7 @@ public class SortUtils {
     }
 
     /**
-     * 冒泡排序，每次都从第一个开始，然后把符合条件（升序or降序）的挪到后面
+     * 冒泡排序，每次都从第一个开始，比较相邻两个元素，把符合条件（升序or降序）的挪到后面，第二层循环size不断减少
      * */
     public static void bubbleSort(int[] arr, boolean asc) {
         int size = arr.length;
@@ -199,6 +199,35 @@ public class SortUtils {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 插入排序，前面的都是已经排序的，然后从i+1往前扫描，如果有遇到比它小的，就把前面的往后移位，直到遇到相等或者小于的。
+     * 关键点是记录 current值以及往后替换排位
+     * */
+    public static void insertSort(int[] arr, boolean asc) {
+        int size = arr.length;
+        if(size == 0) {
+            return ;
+        }
+        int current = 0;
+        int prevIndex = 0;
+        for(int i=0; i<size-1; i++) {
+            current = arr[i+1];
+            prevIndex = i;
+            if(asc) {
+                while (prevIndex >= 0 && current < arr[prevIndex]) {
+                    arr[prevIndex + 1] = arr[prevIndex];
+                    prevIndex--;
+                }
+            } else {
+                while(prevIndex >= 0 && current > arr[prevIndex]) {
+                    arr[prevIndex + 1] = arr[prevIndex];
+                    prevIndex--;
+                }
+            }
+            arr[prevIndex+1] = current;
         }
     }
 }
